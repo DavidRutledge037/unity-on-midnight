@@ -1,0 +1,19 @@
+pragma language_version >= 0.14.0;
+import CompactStandardLibrary;
+
+ledger tDust: Field;
+ledger loanTokens: Field;
+ledger k: Field;
+
+export circuit init(): [] {
+    tDust = 1000 as Field;
+    loanTokens = 1 as Field;
+    k = 1000 as Field;
+    return [];
+}
+
+export circuit borrow(amount: Field, newLoanTokens: Field): [] {
+    tDust = tDust-amount;
+    loanTokens = newLoanTokens;
+    return [];
+}

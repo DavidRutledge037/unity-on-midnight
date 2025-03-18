@@ -1,0 +1,15 @@
+pragma language_version >= 0.14.0;
+import CompactStandardLibrary;
+
+ledger records: Map<Bytes<32>, Field>;
+ledger admin: Bytes<32>;
+
+export circuit init(): [] {
+    admin = pad(32, "");
+    return [];
+}
+
+export circuit verifyKyc(user: Bytes<32>): [] {
+    records.insert(user, 1);
+    return [];
+}

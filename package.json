@@ -4,7 +4,9 @@
   "description": "Unity on Midnight",
   "main": "index.js",
   "scripts": {
-    "deploy": "node src/deploy.mjs"
+    "deploy": "node src/deploy.mjs",
+    "compile": "scripts/compile_contracts.sh",
+    "compile:lite": "scripts/compile_contracts_lite.sh"
   },
   "author": "",
   "license": "ISC",

@@ -75,8 +75,37 @@ Handles KYC verification with:
 - Merkle tree storage for records
 - Integration with DID for TrustPoints
 
+## Light Contracts
+
+Simplified implementations with ZK circuits:
+
+#### 1. KYC Light
+- Single transition: `verifyKyc` (ZK)
+- Simple status tracking (1 = verified)
+- Privacy-preserving status updates
+- Verifier key: `build/contracts/kyc_light/keys/verifyKyc.verifier`
+
+#### 2. DID Light
+- Single transition: `createDid` (ZK)
+- Basic DID document storage
+- Hash-based document linking
+- Verifier key: `build/contracts/did_light/keys/createDid.verifier`
+
+#### 3. AMM Light
+- Single transition: `borrow` (ZK)
+- Constant product (k = tDust * loanTokens)
+- Privacy-preserving loan operations
+- Verifier key: `build/contracts/amm_light/keys/borrow.verifier`
+
+#### 4. TrustPoints Light
+- Single transition: `addPoints` (ZK)
+- Private point tracking
+- Cumulative point system
+- Verifier key: `build/contracts/trustpoints_light/keys/addPoints.verifier`
+
 ## Build Process
 
+### Full Contracts
 Contracts are compiled using the Compact compiler (version 0.21.0):
 
 ```bash
@@ -84,6 +113,22 @@ Contracts are compiled using the Compact compiler (version 0.21.0):
 compactc src/blockchain/contracts/amm_interface.compact build/contracts/amm
 compactc src/blockchain/contracts/kyc_verification.compact build/contracts/kyc
 compactc src/blockchain/contracts/did_registry.compact build/contracts/did
+```
+
+### Light Contracts
+Light contracts are compiled using compactc v0.14.0:
+
+```bash
+# Build script: scripts/compile_contracts_lite.sh
+compactc src/blockchain/contracts/kyc_light.compact build/contracts/kyc_light
+compactc src/blockchain/contracts/did_light.compact build/contracts/did_light
+compactc src/blockchain/contracts/amm_light.compact build/contracts/amm_light
+compactc src/blockchain/contracts/trustpoints_light.compact build/contracts/trustpoints_light
+```
+
+Run with:
+```bash
+npm run compile:lite
 ```
 
 ## Integration Points
@@ -124,8 +169,8 @@ Contract testing is handled through:
 4. Service layer tests (e.g., amm.service.test.ts)
 
 ## Status (March 18, 2025)
-- KYC stalled: WASM error in `@midnight-ntwrk/midnight-js-contracts` (`addVerifierKeys`)—9 keys loaded, serialization issue per DevRel (Claude).
-- Proof server "Undeployed" blocks TestNet-02.
+- Full: WASM error—serialization (DevRel, Claude).
+- Light: Compiled with `compile_contracts_lite.sh`—CLI deploy next.
 
 ## Future Considerations
 

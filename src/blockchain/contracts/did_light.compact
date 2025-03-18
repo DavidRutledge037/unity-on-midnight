@@ -1,0 +1,16 @@
+pragma language_version >= 0.14.0;
+import CompactStandardLibrary;
+
+ledger documents: Map<Bytes<32>, Bytes<32>>;
+ledger admin: Bytes<32>;
+
+export circuit init(): [] {
+    admin = pad(32, "");
+    return [];
+}
+
+export circuit createDid(user: Bytes<32>): [] {
+    const hash = persistent_hash<Vector<1, Bytes<32>>>([user]);
+    documents.insert(user, hash);
+    return [];
+}

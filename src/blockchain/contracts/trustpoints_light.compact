@@ -1,0 +1,14 @@
+pragma language_version >= 0.14.0;
+import CompactStandardLibrary;
+
+ledger points: Map<Bytes<32>, Field>;
+
+export circuit init(): [] {
+    return [];
+}
+
+export circuit addPoints(user: Bytes<32>, amount: Field): [] {
+    const current = points.member(user) ? points.lookup(user) : 0;
+    points.insert(user, current + amount);
+    return [];
+}
