@@ -1,30 +1,27 @@
 # Unity on Midnight - Privacy-Preserving AMM
-
-A decentralized exchange (DEX) built on Midnight that uses zero-knowledge proofs to provide privacy for trades and liquidity pools. This project is part of the AMM Midnight Hackathon.
+A decentralized lending DApp on Midnight using ZKPs for unbanked users—built for the AMM Midnight Hackathon.
 
 ## Features
-
-- **Private Trading**: Execute trades with privacy using zero-knowledge proofs
-- **Hidden Liquidity**: Provide liquidity without revealing your position
-- **Midnight Integration**: Built natively on the Midnight network
-- **Modern UI**: Beautiful and intuitive interface built with Next.js and shadcn/ui
+- Private KYC/DID via ZKPs
+- AMM lending pool (100 tDust loans, 10% interest)
+- TrustPoints system
+- Next.js UI with Lace wallet
 
 ## Technology Stack
+- **Frontend**: Next.js 14, TypeScript, shadcn/ui, Tailwind CSS, Lace Wallet
+- **Contracts**: Compact (ZKPs), Midnight TestNet-02
 
-- **Frontend**:
-  - Next.js 14 (App Router)
-  - TypeScript
-  - shadcn/ui components
-  - Tailwind CSS
-  - Midnight Lace Wallet Integration
+## Deployment Status
+- **Current**: KYC/AMM/DID stalled—WASM error in `@midnight-ntwrk/midnight-js-contracts` (`addVerifierKeys`).
+- **Logs**: 9 keys (4665 bytes, `Uint8Array`) loaded—e.g., `generate_key_proof` (`0602`), `get_kyc_status` (`0202`)—WASM fails post-hand-off.
+- **DevRel**: Claude (3/18/25, 1:53 PM) tracing to package source—engineer review pending.
+- **Proof Server**: "Undeployed" rejects TestNet-02—separate issue.
 
-- **Smart Contracts**:
-  - Midnight's Compact language
-  - Zero-knowledge proofs for privacy
-  - AMM algorithms for price balancing
+## Next Steps
+- UI mocks, Lace integration—tonight
+- CLI deploy or engineer fix—March 19
 
 ## Documentation
-
 - [Getting Started](docs/getting-started.md)
 - [Wallet Integration](docs/wallet-integration.md)
 - [Smart Contracts](docs/smart-contracts.md)

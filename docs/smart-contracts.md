@@ -43,10 +43,10 @@ The AMM (Automated Market Maker) contract implements a lending pool with the fol
 
 - Constant product AMM (k = tDust * loanTokens)
 - Fixed loan size: 100 tDust
-- 10% interest rate (110 tDust repayment)
+- **Dynamic interest rates**: 9-11% based on utilization (>80% = 11%, <20% = 9%, else 10%)
 - 2% fee (1 tDust to Loss Pool)
-- 90% default compensation
-- Interest distribution proportional to deposits
+- 90% default compensation from Loss Pool
+- **Liquidity pool loans**: Funds sourced from depositors
 
 Key Circuits:
 - borrow.zkir (k=13, 5256 rows)
@@ -123,6 +123,10 @@ Contract testing is handled through:
 3. ZK proof verification tests
 4. Service layer tests (e.g., amm.service.test.ts)
 
+## Status (March 18, 2025)
+- KYC stalled: WASM error in `@midnight-ntwrk/midnight-js-contracts` (`addVerifierKeys`)—9 keys loaded, serialization issue per DevRel (Claude).
+- Proof server "Undeployed" blocks TestNet-02.
+
 ## Future Considerations
 
 1. Scalability:
@@ -132,7 +136,6 @@ Contract testing is handled through:
 
 2. Features:
    - Variable loan sizes
-   - Dynamic interest rates
    - Additional pool types
    - Enhanced privacy features
 
